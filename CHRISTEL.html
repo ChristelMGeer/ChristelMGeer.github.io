@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<link href="https://fonts.googleapis.com/css2?family=Neucha&family=Neuton:wght@200&display=swap" rel="stylesheet">
+<head>
+  <title>Christel Geer</title>
+  <style>
+    body {
+      text-align: center;
+      background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjE9LzGSGstSUI-vIK2GwMetx-Qj04XCqn3A&usqp=CAU");
+      
+      background-size: cover;
+      background-position: center;
+      color: #4298EE;
+      font-family: 'Neucha', cursive;
+    }
+    p {
+      font-size: 22px;
+    }
+    input {
+      border: 0;
+      padding: 10px;
+      font-size: 18px;
+      font-family: 'Neuton', serif;
+    }
+    input[type="submit"] {
+      background: blue;
+      color: pink;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://styles.redditmedia.com/t5_346cl/styles/communityIcon_09sormoxbtu31.png">
+  <p>Hi! I'm Christel</p>
+	<input id="Name" placeholder= "Your name">
+  <input id="Email" placeholder="Your email">
+  <input id="submit" type= "submit">
+	<script type="module">
+	  // Import the functions you need from the SDKs you need
+	  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+		import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js";
+		
+	  // TODO: Add SDKs for Firebase products that you want to use
+	  // https://firebase.google.com/docs/web/setup#available-libraries
+
+	  // Your web app's Firebase configuration
+	  const firebaseConfig = {
+	    apiKey: "AIzaSyCWdqIX5TX3Ab8Pzfk44HoxEnez62-Ai_I",
+	    authDomain: "christelg-9759.firebaseapp.com",
+	    projectId: "christelg-9759",
+	    storageBucket: "christelg-9759.appspot.com",
+	    messagingSenderId: "299612705386",
+	    appId: "1:299612705386:web:f0fb6649b9c44727157013"
+	  };
+
+	  // Initialize Firebase
+	  const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const Name = document.querySelector("#Name") 
+const Email = document.querySelector("#Email")
+document.querySelector('#submit').addEventListener('click', Submit)
+
+function Submit() {
+	  const timestamp = buildTimestamp()
+	  
+	  set(ref(db, timestamp), {
+		  Name: Name.value,
+	      email: Email.value,
+	  });
+
+	  Name.value = ""
+	  Email.value = ""
+	}
+
+	function buildTimestamp() {
+	  const now = new Date();
+	  let timestamp = now.getFullYear().toString() + "/";
+	  //const month = now.toLocaleString('default', { month: 'long' });
+
+	  let month = now.getMonth()+1   //add 1 because Javascript uses 0 for January
+	  month = month.toString()
+	  month = addLeadingZero(month)
+	  timestamp += month + "/"; 
+
+	  let date = now.getDate().toString()
+	  date = addLeadingZero(date)
+	  timestamp += date + "/";
+
+	  let hours = now.getHours().toString()
+	  hours = addLeadingZero(hours)
+	  timestamp += hours + ":";
+
+	  let minutes = now.getMinutes().toString()
+	  minutes = addLeadingZero(minutes)
+	  timestamp += minutes + ":";
+
+	  let seconds = now.getSeconds().toString()
+	  seconds = addLeadingZero(seconds)
+	  timestamp += seconds;
+  
+	  return timestamp
+	}
+	
+	function addLeadingZero(units) {
+		if (units.length < 2) {
+			units = "0" + units
+		}
+		return units
+	}
+
+
+	</script>
+</body>
