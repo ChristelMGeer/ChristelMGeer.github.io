@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<head>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Xanh+Mono:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+
+<style>
+body {
+  font-family: 'Xanh Mono', monospace;
+  margin: 0 auto;
+  max-width: 600px;
+  background: #00FFF7;
+}
+div {
+  height: 200px;
+  background-size: cover;
+  position: relative;
+  margin: 40px 0 0 0;
+  border-radius: 12px;
+}
+h1 {
+  font-family: 'Poiret One', cursive;
+  text-align: center;
+  font-size: 75px;
+  color: #E65EEF;
+  margin: 60px 0 0 0;
+}
+h2 {
+  text-align: center;
+  color: #E842FF;
+  margin: 0px 0 70px 0;
+  font-family: 'Poiret One', cursive;
+
+}
+p {
+  color: rgba(255,255,255,1);
+  background: black;
+  background: linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+  background: -webkit-linear-gradient(bottom, rgba(227,103,103,1), rgba(255,73,0,.4));
+  background: -moz-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+  padding: 10px;
+  line-height: 28px;
+  text-align: justify;
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  height: 30px;
+  transition: height .5s;
+  -webkit-transition: height .5s;
+  -moz-transition: height .5s;
+  font-family: 'Xanh Mono', monospace;
+  color: #4BE2F2;
+}
+
+
+small {
+  opacity: 0;
+}
+
+.show-description p {
+  height: 150px;
+}
+
+.show-description small {
+  opacity: 1;
+}
+
+.first{
+  background-image: url("https://media.eggs.ca/assets/RecipePhotos/_resampled/FillWyIxMjgwIiwiNzIwIl0/Fluffy-Pancakes-New-CMS.jpg");
+}
+.second{
+  background-image: url("https://insanelygoodrecipes.com/wp-content/uploads/2021/01/Homemade-Ground-Beef-Lasagna-with-Melted-Cheese.png");
+}
+.dessert{
+  background-image: url("https://lh4.googleusercontent.com/-MRUStEEYOmc/U7JWcA51m3I/AAAAAAAEm4o/pa_FfnB-jsU/s800/ice-cream-cupcakes-2a.jpg");
+}
+.price {
+  float: right;
+}
+@media (max-width: 500px) {
+  h1 {
+    font-size: 50px;
+    margin-top: 20px;
+    line-height: 40px;
+  }
+  h2 {
+    font-size: 20px;
+    margin: 20px 0 30px 0;
+  }
+  div {
+    margin: 20px 12px 0 12px;
+  }
+  p {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  small {
+    font-size: 16px;
+  }
+	input {
+		font-size: 22px;
+	}
+}
+
+</style>
+
+</head>
+
+<body>
+<h1>CHRISTEL'S DINER</h1>
+<h2>a Queens, New York City eatery</h2>
+<div class="first">
+	<input class="quantities" type="number" min="0" style="width: 50px">
+  <p>The OG Pancakes <span class="price">$10</span><br />
+  <small>A pancake is a flat cake, often thin and round, prepared from a starch-based batter that may contain eggs, milk and butter and cooked on a hot surface such as a griddle or frying pan, often frying with oil or butter. It is a type of batter bread. </small></p>
+</div>
+
+<div class="second">
+	<input class="quantities" type="number" min="0" style="width: 50px">
+  <p>Classic Lasagne<span class="price">$25</span><br />
+  <small>Lasagna is a form of pasta that may be one of the oldest types crafted from very huge, flattened strips. Lasagne may be crowned with grated cheese, which turns into melted after baking. commonly cooked pasta is assembled with the other elements and then baked in an oven. The ensuing baked pasta is reduce into single-serving rectangular portions.</small></p>
+</div>
+  
+<div class="dessert">
+	<input class="quantities" type="number" min="0" style="width: 50px">
+  <p>Chocolate Cupcakes w/ Icecream <span class="price">$11</span><br />
+  <small>The Ultimate Ice Cream Chocolate Cupcakes are made with moist chocolate cupcakes stuffed with ice cream and topped with whipped cream, chocolate and sprinkles! </small></p>
+
+
+</div>
+
+<br><br>
+	<input id="Name" placeholder= "Your name">
+	  <input id="Email" placeholder="Your email">
+	  <input id="submit" type= "submit">
+<br><br>
+
+
+<script>
+  $('div').on('click', function() {
+      $(this).toggleClass('show-description');
+  });
+</script>
+
+</body>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+	import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js";
+	
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+
+    apiKey: "AIzaSyA-hSNwBCcZG4NzqA7QuRX0o9cDlnFH0Fg",
+    authDomain: "christelmgeer.firebaseapp.com",
+    projectId: "christelmgeer",
+    storageBucket: "christelmgeer.appspot.com",
+    messagingSenderId: "804087980444",
+    appId: "1:804087980444:web:a6253d35bb7c390617e859"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+			const db = getDatabase(app);
+			const Name = document.querySelector("#Name") 
+			const Email = document.querySelector("#Email")
+			document.querySelector('#submit').addEventListener('click', Submit)
+			const quantities = document.querySelectorAll(".quantities")
+			const prices = document.querySelectorAll(".price")
+			
+const itemsList = ["The OG Pancakes", "Classic Lasagne", "Chocolate Cupcakes w Icecream"]
+			
+
+			function Submit() {
+				  const timestamp = buildTimestamp()
+				let total = 0
+			  let cart = { }
+			  for  (let i=0; i<quantities.length; i=i+1) {
+			  	if (quantities[i].value != "0" && quantities[i].value != "") {	
+let price = prices[i].innerHTML.replace('$', '')
+			  total = total + quantities[i].value * price 
+			  		cart[itemsList[i]] = parseInt(quantities[i].value) 
+			  	}
+			  	quantities[i].value = ""
+			  }
+	  
+				  set(ref(db, timestamp), {
+					  Name: Name.value,
+				      email: Email.value,
+						cart: cart,
+totalPrice: total,
+		  paid: "not yet",
+						
+						
+				  });
+
+				  Name.value = ""
+				  Email.value = ""
+				}
+
+				function buildTimestamp() {
+				  const now = new Date();
+				  let timestamp = now.getFullYear().toString() + "/";
+				  //const month = now.toLocaleString('default', { month: 'long' });
+
+				  let month = now.getMonth()+1   //add 1 because Javascript uses 0 for January
+				  month = month.toString()
+				  month = addLeadingZero(month)
+				  timestamp += month + "/"; 
+
+				  let date = now.getDate().toString()
+				  date = addLeadingZero(date)
+				  timestamp += date + "/";
+
+				  let hours = now.getHours().toString()
+				  hours = addLeadingZero(hours)
+				  timestamp += hours + ":";
+
+				  let minutes = now.getMinutes().toString()
+				  minutes = addLeadingZero(minutes)
+				  timestamp += minutes + ":";
+
+				  let seconds = now.getSeconds().toString()
+				  seconds = addLeadingZero(seconds)
+				  timestamp += seconds;
+  
+				  return timestamp
+				}
+	
+				function addLeadingZero(units) {
+					if (units.length < 2) {
+						units = "0" + units
+					}
+					return units
+				}
+
+			
+</script>
+
+</body>
